@@ -45,6 +45,31 @@
   cursor: pointer;
 }
 
+.card-component {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.card-component:target {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#book-info:target .book-info-card {
+  animation: pop-up 0.3s ease-in;
+}
+
+@keyframes pop-up {
+  from {
+    transform: translate(-50%, calc(-50% + 10px)) scale(.95);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
 .book-info-card {
   display: flex;
   flex-direction: column;
@@ -60,7 +85,6 @@
   text-align: center;
   padding: 1.5rem;
   border-radius: 10px;
-  opacity: 0;
 }
 
 .book-info-card p {
@@ -86,7 +110,7 @@
   color: var(--primary-text-color-dark);
 }
 
-.overlay-on {
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
