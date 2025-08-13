@@ -35,8 +35,63 @@
   overflow-x: auto;
 }
 
+.book-info-card:target {
+  opacity: 1;
+}
+
 .book {
   width: clamp(60px, 15vh, 130px);
   height: clamp(100px, 20vh, 190px);
   cursor: pointer;
+}
+
+.book-info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  background-color: var(--primary-color-2);
+  z-index: 5;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+.book-info-card p {
+  font-family: Arial;
+}
+
+.exit-book-info-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  background-color:  var(--secondary-color-1);
+  border-radius: 50%;
+  color: white;
+}
+
+.book-info-card span {
+  color: var(--primary-text-color-dark);
+}
+
+.overlay-on {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.715);
+  z-index: 1;
 }
