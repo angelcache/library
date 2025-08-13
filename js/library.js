@@ -72,8 +72,6 @@ function addNewBook(book, hasRead) {
   newBook.classList.add("book");
   newBook.src = book.bookCover;
   console.log(book.bookCover);
-  newBook.width = 130;
-  newBook.height = 190;
 
   bookShelf.appendChild(newBook);
 }

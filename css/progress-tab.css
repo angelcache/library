@@ -1,0 +1,34 @@
+
+
+.progress-tab {
+  position: absolute;
+  right: 0;
+  top: clamp(10px, 20vh, 60px);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: clamp(5px, 5vw, 40px);
+  width: clamp(370px, 32vw, 500px);
+  height: 50px;
+  background-color: var(--primary-color-2);
+  border-radius: 8px;
+  box-shadow: -1px 3px 1px 0px var(--secondary-color-2);
+}
+
+.progress-tab h2 {
+  font-weight: normal;
+  font-size: clamp(14px, 2vw, 20px)
+}
+
+.finished-text {
+  margin-left: 25px;
+  color: var(--secondary-text-color-1);
+}
+
+.ongoing-text {
+  color: var(--secondary-text-color-2);
+}
+
+.total-text {
+  color: var(--secondary-text-color-3);
+}

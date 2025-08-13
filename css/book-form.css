@@ -1,0 +1,95 @@
+body {
+  display: grid;
+  grid-template-columns: clamp(350px, 40vw, 450px) 1fr;
+  height: 100vh;
+  color: var(--primary-text-color);
+  font-size: 0.9rem;
+  overflow: hidden;
+  font-family: 'Inknut Antiqua', Arial,Arial, Helvetica, sans-serif;
+  background-color: var(--primary-color-1);
+}
+
+#form-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--primary-color-2);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 1vw, 40px);
+  margin-bottom: -20px;
+}
+
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo img {
+  width: clamp(20px, 5vw, 60px);
+  height: auto;
+  align-self: center;
+}
+
+.logo h1 {
+  font-size: clamp(20px, 5vw, 40px);
+}
+
+.logo h1 img {
+  width: clamp(30px, 20vw, 200px);
+  height: auto;
+}
+
+.image-uploader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: clamp(10px, 20vh, 200px);
+  width: 340px;
+  background-color: var(--highlight-color);
+  border: 2px dashed var(--secondary-color-1);
+}
+
+.image-uploader img {
+  width: clamp(40px, 10vw, 60px);
+  height: auto;
+  align-self: center;
+}
+
+.file-uploader {
+  display: none;
+}
+
+#book-form input {
+  height: clamp(10px, 5vh, 35px);
+  background-color: var(--primary-color-1);
+  border: 2px solid var(--secondary-color-1);
+}
+
+#book-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+#book-form div .check-box {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-button {
+  border: 2px solid var(--secondary-color-1);
+  padding: 20px;
+  background-color: var(--primary-color-1);
+  width: 200px;
+  color: var(--primary-text-color);
+  cursor: pointer;
+  margin-top: 5px;
+}

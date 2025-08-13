@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/modern-normalize.css">
-  <link rel="stylesheet" href="css/library.css">
+  <link rel="stylesheet" href="css/book-form.css">
+  <link rel="stylesheet" href="css/progress-tab.css">
+  <link rel="stylesheet" href="css/books-section.css">
   <link rel="stylesheet" href="css/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <title>Library</title>
 </head>
 <body> 
@@ -16,35 +21,69 @@
       <h1><img src="img/library-text.png" alt="library header"></img></h1>
     </div>
 
-    </form>
     <form id="book-form" method="post" enctype="multipart/form-data">
-      <label for="imageUpload">Choose Image:</label>
-      <input type="file" id="imageUpload" name="image" accept="image/*" required>
-      <label for="title">Book Title:</label>
-      <input type="text" id="title" required>
-      <label for="author">Author:</label>
-      <input type="text" id="author" required>
-      <label for="totalPages">Total Pages:</label>
-      <input type="number" id="totalPages" required>
-      <label for="pagesRead">Pages Read:</label>
-      <input type="number" id="pagesRead" required>
       <div>
-        <input type="checkbox" id="checkbox" name="checkbox">
-        <label for="checkbox">I have finished reading this book</label>
+        <label class="image-uploader" for="imageUpload">
+          <img src="img/camera.png" alt="camera">
+        </label>
+        <input class="file-uploader" type="file" id="imageUpload" name="image" accept="image/*" required>
+      </div>
+      <div>
+        <label for="title">Book Title:</label>
+        <input type="text" id="title" required>
+      </div>
+      <div>
+        <label for="author">Author:</label>
+        <input type="text" id="author" required>
+      </div>
+      <div>
+        <label for="totalPages">Total Pages:</label>
+        <input type="number" id="totalPages" required>
+      </div>
+      <div>
+        <label for="pagesRead">Pages Read:</label>
+        <input type="number" id="pagesRead" required>
+      </div>
+      <div>
+        <div class="check-box">
+          <input type="checkbox" id="checkbox" name="checkbox">
+          <label for="checkbox">I have finished reading this book</label>
+        </div>
         <button type="submit"
-        class="add-button">add book</button>
+        class="add-button">A D D &nbsp;&nbsp; B O O K</button>
       </div>
     </form>
   </section>
 
-  <section class="read-books" width="500px" height="200px">
-    sdfsdf
-  </section>
+  <section id="books-section">
+    <div class="progress-tab">
+      <h2 class="finished-text">
+        finished: 1
+      </h2>
+      <h2 class="ongoing-text">
+        ongoing: 3
+      </h2>
+      <h2 class="total-text">
+        total: 6
+      </h2>
+    </div>
 
-  <section class="unread-books">
+    <div>
+      <h1>In Progress</h1>
+      <div class="unread-books">
+      </div>
+      <div class="line"></div>
+    </div>
+
+    <div>
+      <h1>Finished</h1>
+      <div class="read-books" width="500px" height="200px">
+      </div>
+      <div class="line"></div>
+    </div>
 
   </section>
 
   <script src="js/library.js"></script>
-</body>
+</body>dsf
 </html>

@@ -1,0 +1,42 @@
+#books-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: clamp(50px, 4vh, 60px);
+  gap: clamp(10px, 8vh, 100px);
+}
+
+#books-section h1 {
+  font-weight: normal;
+  color: var(--secondary-color-1);
+}
+
+.book {
+  border: 2px solid var(--secondary-color-1);
+}
+
+.line {
+  width: clamp(800px, 62vw, 2000px);
+  height: clamp(20px, 2vh, 40px);
+  background-color: var(--line-color);
+  border-radius: 10px;
+  box-shadow: 5px 5px 3px 3px var(--line-shadow-color);
+  margin-bottom: 50px;
+}
+
+.unread-books,
+.read-books {
+  display: flex;
+  width: clamp(450px, 55vw, 1900px);
+  min-height: 15vh;
+  margin-left: 50px;
+  gap: clamp(10px, 10vw, 70px);
+  overflow-x: auto;
+}
+
+.book {
+  width: clamp(60px, 15vh, 130px);
+  height: clamp(100px, 20vh, 190px);
+  cursor: pointer;
+}
