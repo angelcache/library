@@ -35,7 +35,7 @@
   overflow-x: auto;
 }
 
-.book-info-card:target {
+.book-info-card-unread:target {
   opacity: 1;
 }
 
@@ -55,8 +55,22 @@
   pointer-events: auto;
 }
 
-#book-info:target .book-info-card {
-  animation: pop-up 0.3s ease-in;
+
+.card-component:target >*:not(.overlay) {
+  animation: pop-up 0.25s ease-in;
+}
+
+.card-component:target .overlay {
+  animation: fade-in 0.25s ease-in;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes pop-up {
@@ -70,16 +84,17 @@
   }
 }
 
-.book-info-card {
+.book-info-card-unread {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  width: 350px;
-  height: 300px;
+  width: 360px;
+  height: 340px;
   background-color: var(--primary-color-2);
   z-index: 5;
   text-align: center;
@@ -87,7 +102,17 @@
   border-radius: 10px;
 }
 
-.book-info-card p {
+.book-info-card-unread button {
+  background-color: var(--secondary-color-1);
+  border: none;
+  width: 100px;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.book-info-card-unread p {
   font-family: Arial;
 }
 
@@ -106,7 +131,7 @@
   color: white;
 }
 
-.book-info-card span {
+.book-info-card-unread span {
   color: var(--primary-text-color-dark);
 }
 
