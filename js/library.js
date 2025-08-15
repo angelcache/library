@@ -94,6 +94,9 @@ function addNewBook(book, hasRead) {
   newBookPrev.alt = `Cover of ${book.title}`;
 
   bookShelf.appendChild(newBookPrevContainer);
+
+  trackDeleteButton();
+  trackEditButton();
 }
 
 function setUpBookCard(targetId, hasRead, book) {
@@ -134,6 +137,8 @@ function setUpBookCard(targetId, hasRead, book) {
   const editButton = document.createElement("button");
   editButton.innerText = "Edit"
   editButton.classList.add("edit-button");
+  editButton.dataset.id = book.id;
+  editButton.dataset.read = book.isRead ? "1" : "0";
   
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
@@ -176,29 +181,69 @@ function loadBooks() {
   console.log(unreadBooks);
 }
 
-const deleteButtons = document.querySelectorAll(".delete-button");
+function trackDeleteButton() {
+  const deleteButtons = document.querySelectorAll(".delete-button");
 
-deleteButtons.forEach((deleteButton) => {
-  deleteButton.addEventListener("click", () => {
-    const bookId = deleteButton.dataset.id;
-    const read = deleteButton.dataset.read;
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener("click", () => {
+      const bookId = deleteButton.dataset.id;
+      const read = deleteButton.dataset.read;
 
-    let index = -1;
-    if (read === "1") {
-      readBooks = readBooks.filter(b => b.id !== bookId);
-    } else {
-      unreadBooks = unreadBooks.filter(b => b.id !== bookId);
-      console.log(unreadBooks)
-      clearBooks();
-      saveBooks();
-      loadBooks();
-    }  
+      if (read === "1") {
+        readBooks = readBooks.filter(b => b.id !== bookId);
+      } else {
+        unreadBooks = unreadBooks.filter(b => b.id !== bookId);
+        console.log(unreadBooks)
+        clearBooks();
+        saveBooks();
+        loadBooks();
+      }  
+    })
   })
-})
+}
+
+function trackEditButton() {
+  const editButtons = document.querySelectorAll(".edit-button");
+
+  editButtons.forEach((editButton) => {
+    editButton.addEventListener("click", () => {
+      const bookId = editButton.dataset.id;
+      const read = editButton.dataset.read;
+      const bookInfo = document.querySelectorAll(".book-info-card p");
+      let book = [];
+
+      if (editButton.classList.contains("change")) {
+        if (read === "1") {
+          const index = readBooks.findIndex(b => b.id === bookId);
+          book = readBooks[index];
+        } else {
+          const index = unreadBooks.findIndex(b => b.id === bookId);
+          book = unreadBooks[index];
+        }
+
+        book.title = bookInfo[0].innerText;
+        book.author = bookInfo[1].innerText;
+        book.totalPage = bookInfo[2].innerText;
+        book.pagesRead = bookInfo[3].innerText;
+
+        editButton.innerText = "Edit";
+        bookInfo.forEach((info) => {
+          info.contentEditable = "false";
+        })
+      } else {
+        editButton.innerText = "Apply";
+        bookInfo.forEach((info) => {
+          info.contentEditable = "true";
+        })
+      }
+      editButton.classList.toggle("change");
+    })
+  })
+}
 
 function clearBooks() {
   document.querySelector(".read-books")?.replaceChildren();
   document.querySelector(".unread-books")?.replaceChildren();
   document.querySelector("#card-section-read")?.replaceChildren();
-  document.querySelector("#card-section-unread")?.replaceChildren()
+  document.querySelector("#card-section-unread")?.replaceChildren();
 }

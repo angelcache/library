@@ -147,6 +147,7 @@
 .button-container {
   display: flex;
   gap: 25px;
+  margin-top: 8px;
 }
 
 .edit-button {
@@ -154,8 +155,8 @@
 }
 
 .book-info-card .delete-button {
-  background-color: transparent;
-  border: 2px solid #B42318;
+  background-color: #ffecec;
+  border: 1px solid #cc4b4b;
   color: #B42318;
   transition: background-color 0.1s ease-in;
 }
@@ -168,4 +169,24 @@
 .delete-button:hover {
   background-color: #B02A37;
   color: white;
+}
+
+.button-container .change {
+  background-color: var(--secondary-text-color-1);
+}
+
+[contenteditable="true"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--line-shadow-color);  
+  background-color: var(--highlight-color);
+}
+
+[contenteditable="true"]:focus, input:focus {
+  background-color: var(--line-color);
+  outline: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #555;
 }
