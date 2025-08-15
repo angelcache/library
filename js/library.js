@@ -204,7 +204,7 @@ function loadBooks() {
   readBooks.forEach(book => addNewBook(book, true));
   unreadBooks.forEach(book => addNewBook(book, false));
 
-  console.log(unreadBooks);
+  updateProgress();
 }
 
 function trackDeleteButton() {
@@ -275,4 +275,14 @@ function clearBooks() {
   document.querySelector(".unread-books")?.replaceChildren();
   document.querySelector("#card-section-read")?.replaceChildren();
   document.querySelector("#card-section-unread")?.replaceChildren();
+}
+
+function updateProgress() {
+  const finishedBooks = document.querySelector(".finished-text");
+  const ongoingBooks = document.querySelector(".ongoing-text");const totalBooks = document.querySelector(".total-text");
+
+  finishedBooks.innerText = `finished: ${readBooks.length}`;
+  ongoingBooks.innerText =`ongoing: ${unreadBooks.length}`;
+  totalBooks.innerText = `total: ${readBooks.length + unreadBooks.length}`;
+
 }
