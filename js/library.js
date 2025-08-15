@@ -8,17 +8,13 @@ function Book(bookCover, title, author, totalPage, pagesRead, isRead) {
   if (!new.target) {
     throw Error("Must use 'new' operator");
   }
-
+  this.id = crypto.randomUUID();
   this.bookCover = bookCover;
   this.title = title;
   this.author = author;
   this.totalPage = totalPage;
   this.pagesRead = pagesRead;
   this.isRead = isRead;
-
-  function info() {
-    return `${title} by ${author} added to library`
-  }
 }
 
 function generateExampleBook() {
@@ -81,28 +77,31 @@ function addNewBook(book, hasRead) {
   console.log(hasRead);
   const bookShelf = hasRead? document.querySelector(".read-books"): document.querySelector(".unread-books");
 
-  const bookNumber = hasRead ? readBooks.length: unreadBooks.length;
+  const targetId = `#${book.id}`;
 
-  setUpBookCard(bookNumber, hasRead, book);
+  setUpBookCard(targetId, hasRead, book);
 
   const newBookPrevContainer = document.createElement("a");
-  newBookPrevContainer.href = hasRead? `#book-info-read-${bookNumber}`: `#book-info-unread-${bookNumber}`;
+  newBookPrevContainer.href = targetId;
+  newBookPrevContainer.dataset.id = book.id;
+  newBookPrevContainer.dataset.read = hasRead ? "1": "0";
+
   const newBookPrev = document.createElement("img");
 
   newBookPrevContainer.append(newBookPrev);
-
   newBookPrev.classList.add("book");
   newBookPrev.src = book.bookCover;
-  newBookPrev.alt = "book";
+  newBookPrev.alt = `Cover of ${book.title}`;
 
   bookShelf.appendChild(newBookPrevContainer);
 }
 
-function setUpBookCard(bookNumber, hasRead, book) {
+function setUpBookCard(targetId, hasRead, book) {
   const bookCard = hasRead? document.querySelector("#card-section-read"): document.querySelector("#card-section-unread");
 
   const newBookInfoContainer = document.createElement("div");
-  newBookInfoContainer.id = hasRead ? `book-info-read-${bookNumber}`: `book-info-unread-${bookNumber}`;
+  newBookInfoContainer.id = book.id;
+  newBookInfoContainer.dataset.read = hasRead ? "1": "0";
   newBookInfoContainer.classList.add("card-component");
 
   const newBookInfo = document.createElement("div");
@@ -139,6 +138,8 @@ function setUpBookCard(bookNumber, hasRead, book) {
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
   deleteButton.classList.add("delete-button");
+  deleteButton.dataset.id = book.id;
+  deleteButton.dataset.read = book.isRead ? "1" : "0";
 
   const exitContainer = document.createElement("a");
   exitContainer.href = "#";
@@ -173,4 +174,31 @@ function loadBooks() {
   unreadBooks.forEach(book => addNewBook(book, false));
 
   console.log(unreadBooks);
+}
+
+const deleteButtons = document.querySelectorAll(".delete-button");
+
+deleteButtons.forEach((deleteButton) => {
+  deleteButton.addEventListener("click", () => {
+    const bookId = deleteButton.dataset.id;
+    const read = deleteButton.dataset.read;
+
+    let index = -1;
+    if (read === "1") {
+      readBooks = readBooks.filter(b => b.id !== bookId);
+    } else {
+      unreadBooks = unreadBooks.filter(b => b.id !== bookId);
+      console.log(unreadBooks)
+      clearBooks();
+      saveBooks();
+      loadBooks();
+    }  
+  })
+})
+
+function clearBooks() {
+  document.querySelector(".read-books")?.replaceChildren();
+  document.querySelector(".unread-books")?.replaceChildren();
+  document.querySelector("#card-section-read")?.replaceChildren();
+  document.querySelector("#card-section-unread")?.replaceChildren()
 }
