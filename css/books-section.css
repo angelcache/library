@@ -35,7 +35,7 @@
   overflow-x: auto;
 }
 
-.book-info-card-unread:target {
+.book-info-card:target {
   opacity: 1;
 }
 
@@ -84,7 +84,7 @@
   }
 }
 
-.book-info-card-unread {
+.book-info-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,8 +102,7 @@
   border-radius: 10px;
 }
 
-.book-info-card-unread button {
-  background-color: var(--secondary-color-1);
+.book-info-card button {
   border: none;
   width: 100px;
   padding: 10px;
@@ -112,7 +111,7 @@
   cursor: pointer;
 }
 
-.book-info-card-unread p {
+.book-info-card p {
   font-family: Arial;
 }
 
@@ -131,7 +130,7 @@
   color: white;
 }
 
-.book-info-card-unread span {
+.book-info-card span {
   color: var(--primary-text-color-dark);
 }
 
@@ -143,4 +142,30 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.715);
   z-index: 1;
+}
+
+.button-container {
+  display: flex;
+  gap: 25px;
+}
+
+.edit-button {
+  background-color: #517cb3;
+}
+
+.book-info-card .delete-button {
+  background-color: transparent;
+  border: 2px solid #B42318;
+  color: #B42318;
+  transition: background-color 0.1s ease-in;
+}
+
+.edit-button:hover {
+  background-color: #426a9d;
+}
+
+
+.delete-button:hover {
+  background-color: #B02A37;
+  color: white;
 }

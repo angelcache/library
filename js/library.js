@@ -27,7 +27,6 @@ function generateExampleBook() {
     "Harry Potter and the Chamber of Secrets",
     "J.K. Rowling",
     "341",
-    "341",
     "7",
     false,
   );
@@ -81,24 +80,33 @@ function saveBooks() {
 function addNewBook(book, hasRead) {
   console.log(hasRead);
   const bookShelf = hasRead? document.querySelector(".read-books"): document.querySelector(".unread-books");
-  const bookCard = hasRead? document.querySelector("#card-section-read"): document.querySelector("#card-section-unread");
 
   const bookNumber = hasRead ? readBooks.length: unreadBooks.length;
 
-  const newBookInfoContainer = document.createElement("div");
-  newBookInfoContainer.id = (`book-info-unread-${bookNumber}`);
-  newBookInfoContainer.classList.add("card-component");
+  setUpBookCard(bookNumber, hasRead, book);
 
-  console.log(newBookInfoContainer);
-
-  const newBookPrev = document.createElement("img");
   const newBookPrevContainer = document.createElement("a");
   newBookPrevContainer.href = hasRead? `#book-info-read-${bookNumber}`: `#book-info-unread-${bookNumber}`;
+  const newBookPrev = document.createElement("img");
 
   newBookPrevContainer.append(newBookPrev);
 
+  newBookPrev.classList.add("book");
+  newBookPrev.src = book.bookCover;
+  newBookPrev.alt = "book";
+
+  bookShelf.appendChild(newBookPrevContainer);
+}
+
+function setUpBookCard(bookNumber, hasRead, book) {
+  const bookCard = hasRead? document.querySelector("#card-section-read"): document.querySelector("#card-section-unread");
+
+  const newBookInfoContainer = document.createElement("div");
+  newBookInfoContainer.id = hasRead ? `book-info-read-${bookNumber}`: `book-info-unread-${bookNumber}`;
+  newBookInfoContainer.classList.add("card-component");
+
   const newBookInfo = document.createElement("div");
-  newBookInfo.classList.add("book-info-card-unread");
+  newBookInfo.classList.add("book-info-card");
 
   const bookTitleSpan = document.createElement("span");
   bookTitleSpan.innerText = "📔 Book Title:";
@@ -124,11 +132,21 @@ function addNewBook(book, hasRead) {
   const readPages = document.createElement("p");
   readPages.innerText = book.pagesRead;
 
+  const editButton = document.createElement("button");
+  editButton.innerText = "Edit"
+  editButton.classList.add("edit-button");
+  
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
 
   const exitContainer = document.createElement("a");
   exitContainer.href = "#";
+
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container")
+
+  buttonContainer.append(editButton, deleteButton);
 
   const exit = document.createElement("div");
   exit.classList.add("exit-book-info-card");
@@ -136,17 +154,14 @@ function addNewBook(book, hasRead) {
 
   exitContainer.append(exit);
 
-  newBookInfo.append(bookTitleSpan, bookTitle, authorSpan, author, totalPagesSpan, totalPages,ReadPagesSpan, readPages, deleteButton, exitContainer);
+  newBookInfo.append(bookTitleSpan, bookTitle, authorSpan, author, totalPagesSpan, totalPages,ReadPagesSpan, readPages, buttonContainer, exitContainer);
 
-  newBookInfoContainer.append(newBookInfo);
+  const overlay = document.createElement("div");
+  overlay.classList.add("overlay");
+
+  newBookInfoContainer.append(newBookInfo, overlay);
 
   bookCard.append(newBookInfoContainer);
-
-  newBookPrev.classList.add("book");
-  newBookPrev.src = book.bookCover;
-  newBookPrev.alt = "book";
-
-  bookShelf.appendChild(newBookPrevContainer);
 }
 
 function loadBooks() {
