@@ -24,9 +24,9 @@
     <form id="book-form" method="post" enctype="multipart/form-data">
       <div>
         <label class="image-uploader" for="imageUpload">
-          <img src="img/camera.png" alt="camera">
+          <img class="camera" src="img/camera.png" alt="camera">
         </label>
-        <input class="file-uploader" type="file" id="imageUpload" name="image" accept="image/*" required>
+        <input class="file-uploader" type="file" id="imageUpload" name="image" accept="image/*">
       </div>
       <div>
         <label for="title">Book Title:</label>
@@ -36,14 +36,17 @@
         <label for="author">Author:</label>
         <input type="text" id="author" required>
       </div>
-      <div>
-        <label for="totalPages">Total Pages:</label>
-        <input type="number" id="totalPages" required>
+      <div class="pages-comp">
+        <div>
+          <label for="totalPages">Total Pages:</label>
+          <input type="number" id="totalPages" required>
+        </div>
+        <div>
+          <label class="check-box-label" for="pagesRead">Pages Read:</label>
+          <input type="number" id="pagesRead" required>
+        </div>
       </div>
-      <div>
-        <label for="pagesRead">Pages Read:</label>
-        <input type="number" id="pagesRead" required>
-      </div>
+
       <div>
         <div class="check-box">
           <input type="checkbox" id="checkbox" name="checkbox">

@@ -55,12 +55,22 @@ body {
   width: 340px;
   background-color: var(--highlight-color);
   border: 2px dashed var(--secondary-color-1);
+  cursor: pointer;
 }
 
-.image-uploader img {
+.image-uploader .camera {
   width: clamp(40px, 10vw, 60px);
   height: auto;
   align-self: center;
+}
+
+.image-uploader .preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .file-uploader {
@@ -71,14 +81,33 @@ body {
   height: clamp(10px, 5vh, 35px);
   background-color: var(--primary-color-1);
   border: 2px solid var(--secondary-color-1);
+  cursor: pointer;
 }
 
-#book-form div {
-  display: flex;
+#book-form input:not([type="checkbox"]) {
+  margin-top: 5px;
+}
+
+#book-form > .pages-comp { 
+  display: flex; 
+  flex-direction: 
+  row; 
+  gap: 69px;
+  width: 0px;
+} 
+
+.pages-comp > div > input {
+  width: 135px;
+}
+
+
+#book-form > div { 
+  display: flex; 
   flex-direction: column;
 }
 
-#book-form div .check-box {
+#book-form .check-box {
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;

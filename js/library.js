@@ -1,6 +1,7 @@
 let readBooks = []
 let unreadBooks = []
 
+
 generateExampleBook();
 loadBooks();
 
@@ -31,41 +32,66 @@ function generateExampleBook() {
 }
 
 const form = document.querySelector("#book-form");
+let bookCover = "";
+const imageUploader = document.querySelector(".image-uploader");
+
+form.addEventListener("change", () => {
+  const imageUpload = document.querySelector("#imageUpload").files[0];
+
+  if (!imageUpload) return;
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    bookCover = e.target.result;
+
+    // preview of the image
+    imageUploader.innerHTML = "";
+    const previewImg = document.createElement("img");
+    previewImg.classList.add("preview-img");
+    previewImg.src = e.target.result;
+
+    imageUploader.appendChild(previewImg);
+  }
+
+  reader.readAsDataURL(imageUpload);
+});
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  const imageUpload = document.querySelector("#imageUpload").files[0];
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const totalPage = document.querySelector("#totalPages").value;
+  const pagesRead = document.querySelector("#pagesRead").value;
+  const hasRead = document.querySelector("#checkbox").checked;
 
-  let bookCover = "";
-  if (imageUpload) {
-    const reader = new FileReader();
-
-    reader.onload = function () {
-      bookCover = reader.result;
-
-      const title = document.querySelector("#title").value;
-      const author = document.querySelector("#author").value;
-      const totalPage = document.querySelector("#totalPages").value;
-      const pagesRead = document.querySelector("#pagesRead").value;
-      const hasRead = document.querySelector("#checkbox").checked;
-
-      console.log(hasRead);
-      const book = new Book(bookCover, title, author, totalPage, pagesRead, hasRead);
-
-      if (hasRead) {
-        readBooks.push(book);
-      } else {
-        unreadBooks.push(book);
-      }
-      addNewBook(book, hasRead);
-
-      saveBooks();
-      form.reset();
-    };
-
-    reader.readAsDataURL(imageUpload)
+  if (!bookCover) {
+    bookCover = "img/book.png";
   }
+
+  const book = new Book(bookCover, title, author, totalPage, pagesRead, hasRead);
+
+  if (hasRead) {
+    readBooks.push(book);
+  } else {
+    unreadBooks.push(book);
+  }
+
+  imageUploader.innerHTML = "";
+  const camera = document.createElement("img");
+  camera.classList.add(".camera");
+  camera.src= "img/camera.png"
+  camera.alt= "camera";
+
+  imageUploader.appendChild(camera);
+
+  const previewImg = document.querySelector(".preview-img");
+
+  if (previewImg) previewImg.remove();
+
+  addNewBook(book, hasRead);
+  saveBooks();
+  form.reset();
 });
 
 function saveBooks() {
@@ -191,6 +217,9 @@ function trackDeleteButton() {
 
       if (read === "1") {
         readBooks = readBooks.filter(b => b.id !== bookId);
+        clearBooks();
+        saveBooks();
+        loadBooks();
       } else {
         unreadBooks = unreadBooks.filter(b => b.id !== bookId);
         console.log(unreadBooks)

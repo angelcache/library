@@ -183,10 +183,10 @@
   background-color: var(--highlight-color);
 }
 
-[contenteditable="true"]:focus, input:focus {
+[contenteditable="true"]:focus {
   background-color: var(--line-color);
   outline: none;
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: #555;
+  text-decoration-color: var(--underline-color);
 }
