@@ -13,6 +13,7 @@
 }
 
 .book {
+  background-color: var(--secondary-color-1);
   border: 2px solid var(--secondary-color-1);
 }
 
@@ -93,8 +94,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  width: 360px;
-  height: 360px;
   background-color: var(--primary-color-2);
   z-index: 5;
   text-align: center;
@@ -114,10 +113,6 @@
 
 .book-info-card p {
   font-family: Arial;
-}
-
-.book-info-card span:first-of-type {
-  margin-top: 12px;
 }
 
 .exit-book-info-card {

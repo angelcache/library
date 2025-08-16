@@ -92,6 +92,7 @@ form.addEventListener('submit', function(event) {
   saveBooks();
   updateProgress();
   form.reset();
+  bookCover = "";
 });
 
 function saveBooks() {
