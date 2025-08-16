@@ -1,7 +1,6 @@
 let readBooks = []
 let unreadBooks = []
 
-
 generateExampleBook();
 loadBooks();
 
@@ -91,6 +90,7 @@ form.addEventListener('submit', function(event) {
 
   addNewBook(book, hasRead);
   saveBooks();
+  updateProgress();
   form.reset();
 });
 
@@ -123,6 +123,7 @@ function addNewBook(book, hasRead) {
 
   trackDeleteButton();
   trackEditButton();
+  trackFinishedButton();
 }
 
 function setUpBookCard(targetId, hasRead, book) {
@@ -180,13 +181,32 @@ function setUpBookCard(targetId, hasRead, book) {
 
   buttonContainer.append(editButton, deleteButton);
 
+  const cardLine = document.createElement("div");
+  cardLine.classList.add("card-line");
+  cardLine.innerText = ".";
+
+  const moveText = document.createElement("a");
+  moveText.href = "#";
+  moveText.innerText = "mark as finished"
+  moveText.classList.add("move-text");
+  moveText.dataset.id = book.id;
+
   const exit = document.createElement("div");
   exit.classList.add("exit-book-info-card");
   exit.innerText = "X"
 
   exitContainer.append(exit);
 
-  newBookInfo.append(bookTitleSpan, bookTitle, authorSpan, author, totalPagesSpan, totalPages,ReadPagesSpan, readPages, buttonContainer, exitContainer);
+  if (book.isRead) {
+    newBookInfo.style.width = "360px";
+    newBookInfo.style.height = "360px";
+    newBookInfo.append(bookTitleSpan, bookTitle, authorSpan, author, totalPagesSpan, totalPages,ReadPagesSpan, readPages, buttonContainer, exitContainer) 
+  } else {
+    newBookInfo.style.width = "360px";
+    newBookInfo.style.height = "400px";
+    bookTitle.style.marginTop = "15px";
+    newBookInfo.append(bookTitleSpan, bookTitle, authorSpan, author, totalPagesSpan, totalPages,ReadPagesSpan, readPages, buttonContainer, cardLine, moveText, exitContainer)
+  }
 
   const overlay = document.createElement("div");
   overlay.classList.add("overlay");
@@ -270,6 +290,25 @@ function trackEditButton() {
   })
 }
 
+function trackFinishedButton() {
+  const finishedTexts = document.querySelectorAll(".move-text");
+
+  finishedTexts.forEach((finishedText) => {
+    finishedText.addEventListener("click", () => {
+      const bookId = finishedText.dataset.id;
+      const index = unreadBooks.findIndex(b => b.id === bookId);
+
+      unreadBooks[index].isRead = true;
+
+      readBooks.push(unreadBooks[index]);
+      unreadBooks.splice(index, 1);
+      clearBooks();
+      saveBooks();
+      loadBooks();
+    })
+  })
+}
+
 function clearBooks() {
   document.querySelector(".read-books")?.replaceChildren();
   document.querySelector(".unread-books")?.replaceChildren();
@@ -284,5 +323,4 @@ function updateProgress() {
   finishedBooks.innerText = `finished: ${readBooks.length}`;
   ongoingBooks.innerText =`ongoing: ${unreadBooks.length}`;
   totalBooks.innerText = `total: ${readBooks.length + unreadBooks.length}`;
-
 }

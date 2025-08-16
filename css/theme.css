@@ -12,4 +12,10 @@
   --line-color: #F3E7DD;
   --line-shadow-color: #CCC7C2;
   --underline-color: #555;
+  --overlay-color: #000000B6;
+  --edit-button-color: #517cb3;
+  --delete-button-color: #ffecec;
+  --delete-border-color: #cc4b4b;
+  --delete-text-color: #B42318;
+  --delete-hover-color: #B02A37;
 }

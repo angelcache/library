@@ -94,12 +94,13 @@
   transform: translate(-50%, -50%);
   position: absolute;
   width: 360px;
-  height: 340px;
+  height: 360px;
   background-color: var(--primary-color-2);
   z-index: 5;
   text-align: center;
   padding: 1.5rem;
   border-radius: 10px;
+  border: 1.5px solid var(--underline-color);
 }
 
 .book-info-card button {
@@ -115,6 +116,10 @@
   font-family: Arial;
 }
 
+.book-info-card span:first-of-type {
+  margin-top: 12px;
+}
+
 .exit-book-info-card {
   display: flex;
   justify-content: center;
@@ -128,6 +133,7 @@
   background-color:  var(--secondary-color-1);
   border-radius: 50%;
   color: white;
+  border: 1px solid var(--underline-color);
 }
 
 .book-info-card span {
@@ -140,7 +146,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.715);
+  background-color: var(--overlay-color);
   z-index: 1;
 }
 
@@ -151,23 +157,20 @@
 }
 
 .edit-button {
-  background-color: #517cb3;
+  background-color: var(--edit-button-color);
 }
 
 .book-info-card .delete-button {
-  background-color: #ffecec;
-  border: 1px solid #cc4b4b;
-  color: #B42318;
+  background-color: var(--delete-button-color);
+  border: 1px solid var(--delete-border-color);
+  color: var(--delete-text-color);
   transition: background-color 0.1s ease-in;
 }
 
-.edit-button:hover {
-  background-color: #426a9d;
-}
 
 
 .delete-button:hover {
-  background-color: #B02A37;
+  background-color: var(--delete-hover-color);
   color: white;
 }
 
@@ -189,4 +192,23 @@
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: var(--underline-color);
+}
+
+.card-line {
+  width: 100%;
+  height: 1.5px;
+  margin-top: 20px;
+  color: transparent;
+  background-color: var(--line-shadow-color);
+}
+
+.move-text {
+  text-decoration: none;
+  color: var(--primary-text-color-dark);
+  font-family: Arial;
+  margin-top: 15px;
+}
+
+.move-text:hover {
+  color: var(--secondary-text-color-1);
 }
