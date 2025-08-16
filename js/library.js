@@ -1,8 +1,10 @@
 let readBooks = []
 let unreadBooks = []
 
-generateExampleBook();
 loadBooks();
+if (readBooks.length === 0 && unreadBooks.length === 0) {
+  generateExampleBook();
+}
 
 function Book(bookCover, title, author, totalPage, pagesRead, isRead) {
   if (!new.target) {
@@ -15,18 +17,44 @@ function Book(bookCover, title, author, totalPage, pagesRead, isRead) {
   this.totalPage = totalPage;
   this.pagesRead = pagesRead;
   this.isRead = isRead;
+  this.isDemo = false;
 }
 
 function generateExampleBook() {
+
   const exampleBook = new Book(
     "./img/harry-potter.jpg",
-    "Harry Potter and the Chamber of Secrets",
+    "Harry Potter and the Chamber of Secrets (Demo)",
     "J.K. Rowling",
     "341",
     "7",
     false,
   );
+
+  const exampleBook2 = new Book(
+    "./img/love-hypothesis.jpg",
+    "The Love Hypothesis (Demo)",
+    "Ali HazelWood",
+    "416",
+    "416",
+    true,
+  );
+
+  const exampleBook3 = new Book(
+    "./img/omniscent-reader.jpg",
+    "Omniscent Reader (Demo)",
+    "Sing Shong",
+    "275",
+    "275",
+    true,
+  );
+
+  exampleBook.isDemo = true;
+  exampleBook2.isDemo = true;
+  exampleBook3.isDemo = true;
+
   unreadBooks.push(exampleBook);
+  readBooks.push(exampleBook2, exampleBook3);
   saveBooks();
 }
 
