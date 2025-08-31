@@ -1,6 +1,6 @@
 # 📚 Library
 
-A digital bookshelf app I made for The Odin Project! Users can add, delete, and update books, mark them as finished or in progress, and track their reading stats — all stored neatly in localStorage.  
+A digital bookshelf app I made for The Odin Project! Users can add, delete, and update books, mark them as finished or in progress, and track their reading stats: all stored neatly in localStorage.  
 
 
 
