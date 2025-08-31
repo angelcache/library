@@ -2,9 +2,6 @@ let readBooks = []
 let unreadBooks = []
 
 loadBooks();
-if (readBooks.length === 0 && unreadBooks.length === 0) {
-  generateExampleBook();
-}
 
 function Book(bookCover, title, author, totalPage, pagesRead, isRead) {
   if (!new.target) {
@@ -20,7 +17,7 @@ function Book(bookCover, title, author, totalPage, pagesRead, isRead) {
   this.isDemo = false;
 }
 
-function generateExampleBook() {
+function generateExampleBooks() {
 
   const exampleBook = new Book(
     "./img/harry-potter.jpg",
@@ -116,6 +113,15 @@ form.addEventListener('submit', function(event) {
 
   if (previewImg) previewImg.remove();
 
+  const hasDemo = readBooks.some(book => book.isDemo) || unreadBooks.some(book => book.isDemo);
+
+  // remove demo books
+  if (hasDemo) {
+    readBooks = readBooks.filter(book => !book.isDemo);
+    unreadBooks = unreadBooks.filter(book => !book.isDemo);
+    clearBooks();
+  }
+
   addNewBook(book, hasRead);
   saveBooks();
   updateProgress();
@@ -129,7 +135,7 @@ function saveBooks() {
 }
 
 function addNewBook(book, hasRead) {
-  console.log(hasRead);
+
   const bookShelf = hasRead? document.querySelector(".read-books"): document.querySelector(".unread-books");
 
   const targetId = `#${book.id}`;
@@ -248,6 +254,11 @@ function setUpBookCard(targetId, hasRead, book) {
 function loadBooks() {
   readBooks = JSON.parse(localStorage.getItem("readBooks")) || [];
   unreadBooks = JSON.parse(localStorage.getItem("unreadBooks")) || [];
+
+  if (readBooks.length === 0 && unreadBooks.length === 0) {
+    generateExampleBooks();
+    saveBooks();
+  }
 
   // Re-render saved books when the page loads
   readBooks.forEach(book => addNewBook(book, true));
