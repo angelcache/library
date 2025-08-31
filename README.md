@@ -7,8 +7,8 @@ A digital bookshelf app I made for The Odin Project! Users can add, delete, and 
 ## ✨ What’s inside
 - Add, edit, and remove books with an easy interface  
 - Track reading status: finished 📖 or in progress ⏳  
-- View simple reading stats for progress motivation  
-- Data persistence powered by `localStorage`  
+- View simple reading stats
+- Data saved by `localStorage`  
 - Clean, minimal UI with bookshelf vibes  
 
 
